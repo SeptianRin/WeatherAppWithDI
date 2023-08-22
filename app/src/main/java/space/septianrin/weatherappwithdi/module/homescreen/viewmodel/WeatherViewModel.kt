@@ -1,14 +1,17 @@
-package space.septianrin.weatherappwithdi
+package space.septianrin.weatherappwithdi.module.homescreen.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import space.septianrin.weatherappwithdi.module.homescreen.model.WeatherData
+import space.septianrin.weatherappwithdi.module.homescreen.service.WeatherService
 import javax.inject.Inject
 
 @HiltViewModel
-class WeatherViewModel @Inject constructor(private val weatherService: WeatherService) : ViewModel() {
+class WeatherViewModel @Inject constructor(private val weatherService: WeatherService) :
+    ViewModel() {
     // MutableLiveData to hold weather data
     private val _weatherLiveData = MutableLiveData<WeatherData>()
 

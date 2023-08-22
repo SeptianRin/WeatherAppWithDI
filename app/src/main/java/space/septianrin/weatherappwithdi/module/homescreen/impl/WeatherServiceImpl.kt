@@ -1,14 +1,12 @@
-package space.septianrin.weatherappwithdi
+package space.septianrin.weatherappwithdi.module.homescreen.impl
 
-interface WeatherService {
-    fun getWeather(): WeatherData
-    fun getListWeather() : MutableList<WeatherData>
-}
+import space.septianrin.weatherappwithdi.module.homescreen.model.WeatherData
+import space.septianrin.weatherappwithdi.module.homescreen.service.WeatherService
 
 class WeatherServiceImpl : WeatherService {
     override fun getWeather(): WeatherData {
         // Simulate fetch data
-        return WeatherData("Sunny",25)
+        return WeatherData("Sunny", 25)
     }
 
     override fun getListWeather(): MutableList<WeatherData> {
@@ -30,5 +28,3 @@ class WeatherServiceImpl : WeatherService {
         return weatherDatas
     }
 }
-
-data class WeatherData(val condition: String, val temperature: Int)

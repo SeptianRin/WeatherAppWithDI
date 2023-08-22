@@ -1,9 +1,10 @@
-package space.septianrin.weatherappwithdi
+package space.septianrin.weatherappwithdi.module.homescreen.view
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
+import space.septianrin.weatherappwithdi.module.homescreen.viewmodel.WeatherViewModel
 import space.septianrin.weatherappwithdi.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
