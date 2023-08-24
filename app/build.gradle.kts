@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -6,6 +8,7 @@ plugins {
 }
 
 android {
+    val key: String = gradleLocalProperties(rootDir).getProperty("key")
     namespace = "space.septianrin.weatherappwithdi"
     compileSdk = 33
 
@@ -21,8 +24,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
         android.buildFeatures.buildConfig = true
-        buildConfigField("String", "WEATHER_API_KEY", "\"20db7b90aeb54701bb141652232408\"")
+        buildConfigField("String", "WEATHER_API_KEY", key)
     }
 
     buildTypes {
