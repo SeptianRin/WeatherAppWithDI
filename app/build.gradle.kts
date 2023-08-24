@@ -21,6 +21,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        android.buildFeatures.buildConfig = true
+        buildConfigField("String", "WEATHER_API_KEY", "\"20db7b90aeb54701bb141652232408\"")
     }
 
     buildTypes {
@@ -57,4 +59,9 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.3.5")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+
 }
