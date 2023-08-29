@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val weatherData = networkViewModel.fetchWeather("London", apiKey)
             Log.e("onCreate: ", "$weatherData")
+            val forcastData = weatherViewModel.fetchByRxJava()
         }
     }
 }

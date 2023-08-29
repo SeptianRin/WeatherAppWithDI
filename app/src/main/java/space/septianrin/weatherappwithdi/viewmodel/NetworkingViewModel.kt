@@ -3,7 +3,6 @@ package space.septianrin.weatherappwithdi.viewmodel
 import WeatherResponse
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import space.septianrin.weatherappwithdi.module.homescreen.model.WeatherData
 import space.septianrin.weatherappwithdi.networking.APIService
 import javax.inject.Inject
 
