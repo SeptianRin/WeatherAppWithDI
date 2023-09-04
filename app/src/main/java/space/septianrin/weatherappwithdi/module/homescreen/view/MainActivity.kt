@@ -30,6 +30,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.randomizeWeather.setOnClickListener {
             weatherViewModel.fetchWeatherData()
+            weatherViewModel.fetchBulkByRxJava({
+                Log.e( "onCreate: ", "$it")
+
+            },{
+                Log.e( "onCreate: ", "$it")
+            })
+
         }
         weatherViewModel.weatherLiveData.observe(this) { weatherData ->
             val weatherText =
@@ -40,7 +47,6 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val weatherData = networkViewModel.fetchWeather("London", apiKey)
             Log.e("onCreate: ", "$weatherData")
-            val forcastData = weatherViewModel.fetchByRxJava()
         }
     }
 }

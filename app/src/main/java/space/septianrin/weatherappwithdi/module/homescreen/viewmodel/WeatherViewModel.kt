@@ -1,5 +1,6 @@
 package space.septianrin.weatherappwithdi.module.homescreen.viewmodel
 
+import WeatherResponse
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -9,6 +10,12 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.Scheduler
+import io.reactivex.schedulers.Schedulers
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+import space.septianrin.weatherappwithdi.model.RxSchedulers
 import space.septianrin.weatherappwithdi.module.homescreen.model.WeatherData
 import space.septianrin.weatherappwithdi.module.homescreen.service.WeatherService
 import space.septianrin.weatherappwithdi.networking.APIService
@@ -19,8 +26,7 @@ import javax.inject.Named
 class WeatherViewModel @Inject constructor(
     private val weatherService: WeatherService,
     private val apiService: APIService,
-    @Named("schedulerIo") private val schedulersIo: Scheduler,
-    @Named("mainThread") private val mainThread: Scheduler?,
+    private val schedulers: RxSchedulers,
     private val apiKey : String
 ) :
     ViewModel() {
@@ -40,26 +46,38 @@ class WeatherViewModel @Inject constructor(
     }
 
     @SuppressLint("CheckResult")
-    fun fetchByRxJava() {
-        apiService.getListWeather(
+    fun fetchByRxJava(
+        onSuccess : (WeatherResponse) -> Unit,
+        onFailed : (Throwable) -> Unit,
+    ) {
+        val requestb = bulkRequest()
+        apiService.getByReactive(
             apiKey = apiKey,
             location = "dubai"
         )
-            .subscribeOn(schedulersIo)
-            .observeOn(mainThread)
-            .subscribe(
-                { onSuccess ->
-                    Log.e("fetchByRxJava: ", "SUCCESS : $onSuccess")
-
-                },
-                { onError ->
-                    Log.e("fetchByRxJava: ", "ERROR : $onError")
-                }
-            )
+            .subscribeOn(schedulers.io)
+            .observeOn(schedulers.main)
+            .subscribe(onSuccess,onFailed)
     }
 
-    fun bulkRequest(){
-        "{\n" +
+    @SuppressLint("CheckResult")
+    fun fetchBulkByRxJava(
+        onSuccess : (List<WeatherResponse>) -> Unit,
+        onFailed : (Throwable) -> Unit,
+    ) {
+        apiService.getListByReactive(
+            apiKey = apiKey,
+            query = "bulk",
+            request = bulkRequest()
+        )
+            .subscribeOn(schedulers.io)
+            .observeOn(schedulers.main)
+            .subscribe(onSuccess,onFailed)
+    }
+
+
+    private fun bulkRequest() : RequestBody{
+        val jsonObject = JSONObject("{\n" +
                 "    \"locations\": [\n" +
                 "        {\n" +
                 "            \"q\": \"53,-0.12\",\n" +
@@ -75,6 +93,8 @@ class WeatherViewModel @Inject constructor(
                 "        }\n" +
                 "    ]\n" +
                 "}\n" +
-                "    "
+                "    ")
+        val body = jsonObject.toString().toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+        return body
     }
 }

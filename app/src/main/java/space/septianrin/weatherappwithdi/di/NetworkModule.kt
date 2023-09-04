@@ -19,7 +19,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
     @Provides
     @Singleton
     fun providesOkHttpClient(): OkHttpClient {
@@ -57,19 +56,5 @@ object NetworkModule {
     @Singleton
     fun providesConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
-    }
-
-    @Provides
-    @Singleton
-    @Named("schedulerIo")
-    fun providesSchedulerIo(): Scheduler {
-        return Schedulers.io()
-    }
-
-    @Provides
-    @Singleton
-    @Named("mainThread")
-    fun providesMainThread(): Scheduler? {
-        return AndroidSchedulers.mainThread()
     }
 }
