@@ -1,6 +1,7 @@
 package space.septianrin.weatherappwithdi.networking
 
 import WeatherResponse
+import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.RequestBody
 import org.json.JSONObject
@@ -22,7 +23,7 @@ interface APIService {
     fun getByReactive(
         @Query("key") apiKey : String,
         @Query("q") location : String,
-    ): Single<WeatherResponse>
+    ): Observable<WeatherResponse>
 
     @Headers("Content-Type: application/json")
     @HTTP(method = "get", path = "current.json", hasBody = true)
