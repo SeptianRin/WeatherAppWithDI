@@ -23,6 +23,8 @@ class WeatherViewModel @Inject constructor(
     private val apiKey: String
 ) :
     ViewModel() {
+
+    private val FORECAST_DAY = 6
     // MutableLiveData to hold weather data
     private val _weatherLiveData = MutableLiveData<WeatherResponse>()
 
@@ -32,7 +34,6 @@ class WeatherViewModel @Inject constructor(
 
     // Method to simulate fetching weather data
     fun saveData(weatherData: WeatherResponse) {
-        Log.e("fetchWeatherData: ", "$weatherData")
         _weatherLiveData.postValue(weatherData)
     }
     fun getRandomizedCity(): String {
@@ -45,7 +46,7 @@ class WeatherViewModel @Inject constructor(
         onSuccess: (WeatherResponse) -> Unit,
         onError: (Throwable) -> Unit
     ) {
-        apiService.getByReactive(apiKey, city)
+        apiService.getByReactive(apiKey, city, FORECAST_DAY)
             .subscribeOn(schedulers.io)
             .observeOn(schedulers.main)
             .subscribe(onSuccess, onError)

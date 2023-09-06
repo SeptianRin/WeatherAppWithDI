@@ -19,10 +19,11 @@ interface APIService {
         @Query("q") location : String,
     ) : WeatherResponse
 
-    @GET("current.json")
+    @GET("forecast.json")
     fun getByReactive(
         @Query("key") apiKey : String,
         @Query("q") location : String,
+        @Query("days") days : Int,
     ): Observable<WeatherResponse>
 
     @Headers("Content-Type: application/json")

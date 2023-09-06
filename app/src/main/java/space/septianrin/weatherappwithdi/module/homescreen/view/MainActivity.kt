@@ -15,6 +15,7 @@ import space.septianrin.weatherappwithdi.R
 import space.septianrin.weatherappwithdi.databinding.ActivityMainBinding
 import space.septianrin.weatherappwithdi.module.homescreen.viewmodel.WeatherViewModel
 import space.septianrin.weatherappwithdi.utils.Utils
+import java.util.Calendar
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -47,30 +48,55 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun onObserve() {
         weatherViewModel.weatherLiveData.observe(this) { weatherData ->
-            with(binding){
+            //Big Card
+            with(binding) {
                 cityNameTextView.text = weatherData.location.name
-                currentTemperature.text = "${weatherData.current.tempCelsius}°C"
-                feelLikeTemperature.text = "Feel Like : ${weatherData.current.feelslikeCelsius}°C"
+                currentTemperature.text = "${weatherData.current.tempC}°C"
+                feelLikeTemperature.text = "Feel Like : ${weatherData.current.feelslikeC}°C"
                 valueUV.text = "${weatherData.current.uv}"
                 valueCloudPercent.text = "${weatherData.current.cloud}%"
                 valueHumidityPercent.text = "${weatherData.current.humidity}"
                 valueWindKph.text = "${weatherData.current.windKph}"
-                valueWindDirection.text = "${weatherData.current.windDirection}"
+                valueWindDirection.text = weatherData.current.windDir
 
                 Glide.with(this@MainActivity)
-                    .load(("http:" + weatherData.current.condition.icon).replace("64x64","128x128"))
+                    .load("http:" + weatherData.current.condition.icon)
                     .placeholder(null)
                     .error(R.drawable.ic_launcher_background)
                     .into(weatherImageView)
+
+                //Hourly Forecast
+                val hourlyAdapter = HourlyForecastAdapter(
+                    this@MainActivity.applicationContext,
+                    weatherData.forecast.forecastday[0].hour
+                )
+                val rightNow = Calendar.getInstance()
+                val currentHour: Int =rightNow.get(Calendar.HOUR_OF_DAY)
+                rvHourlyForecast.apply {
+                    adapter = hourlyAdapter
+                    scrollToPosition(currentHour)
+                }
+
+                //Daily Forecast
+                val dailyAdapter = DailyForecastAdapter(
+                    this@MainActivity.applicationContext,
+                    weatherData.forecast.forecastday
+                )
+                rvDailyForecast.apply {
+                    adapter = dailyAdapter
+                    isNestedScrollingEnabled = false
+                }
             }
+
 
         }
     }
 
     private fun onListener() {
-        with(binding){
+        with(binding) {
             randomizeWeather.setOnClickListener {
                 val city = weatherViewModel.getRandomizedCity()
                 weatherViewModel.getCityWeather(
@@ -86,12 +112,22 @@ class MainActivity : AppCompatActivity() {
                 Utils.vibratePhone(this@MainActivity)
                 if (isExpanded) {
                     // Collapse the expandable layout
-                    expandableLayout.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.collapse_animation));
+                    expandableLayout.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            applicationContext,
+                            R.anim.collapse_animation
+                        )
+                    )
                     expandableLayout.visibility = View.GONE
                     isExpanded = false
                 } else {
                     // Expand the expandable layout
-                    expandableLayout.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.expand_animation));
+                    expandableLayout.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            applicationContext,
+                            R.anim.expand_animation
+                        )
+                    )
                     expandableLayout.visibility = View.VISIBLE
                     isExpanded = true
                 }

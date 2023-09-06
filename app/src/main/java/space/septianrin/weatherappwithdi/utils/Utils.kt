@@ -2,13 +2,42 @@ package space.septianrin.weatherappwithdi.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.Context.VIBRATOR_SERVICE
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.os.VibratorManager
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 object Utils {
+    private val GLOBAL_DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
     fun vibratePhone(activity: Activity) {
-        val vibrator = activity.applicationContext?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val vibratorManager =
+                activity.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+            vibratorManager.defaultVibrator
+        } else {
+            @Suppress("DEPRECATION")
+            activity.getSystemService(VIBRATOR_SERVICE) as Vibrator
+        }
         vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
+    }
+
+    fun String.getHourFormat(): String {
+        val hourlyFormatter = DateTimeFormatter.ofPattern("HH:mm")
+        return LocalDateTime.parse(this, GLOBAL_DATETIME_FORMAT).format(hourlyFormatter)
+    }
+
+    fun String.getHour(): Int {
+        val dateTime = LocalDateTime.parse(this, GLOBAL_DATETIME_FORMAT)
+        return dateTime.hour
+    }
+
+    fun String.getThreeLetterDay(): String{
+        val date = LocalDateTime.parse(this, GLOBAL_DATETIME_FORMAT)
+        return date.format(DateTimeFormatter.ofPattern("EEE"))
     }
 }

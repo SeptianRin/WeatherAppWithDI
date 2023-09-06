@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dark_green"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvHourly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:textColor="@color/primary"
+            android:textSize="18sp"
+            tools:text="1 AM"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/ivHourly"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_dark_blue_oval"
+            android:src="@drawable/sun_cloud_rain" />
+
+        <TextView
+            android:id="@+id/tvTemp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            android:gravity="center"
+            android:textColor="@color/primary"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            tools:text="32°C" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
