@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import space.septianrin.weatherappwithdi.R
 import space.septianrin.weatherappwithdi.databinding.ActivityMainBinding
 import space.septianrin.weatherappwithdi.module.homescreen.viewmodel.WeatherViewModel
+import space.septianrin.weatherappwithdi.utils.Utils
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         weatherViewModel.weatherLiveData.observe(this) { weatherData ->
             with(binding){
                 cityNameTextView.text = weatherData.location.name
-                currentTemperature.text = "Current : ${weatherData.current.tempCelsius}°C"
+                currentTemperature.text = "${weatherData.current.tempCelsius}°C"
                 feelLikeTemperature.text = "Feel Like : ${weatherData.current.feelslikeCelsius}°C"
                 valueUV.text = "${weatherData.current.uv}"
                 valueCloudPercent.text = "${weatherData.current.cloud}%"
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
                 Glide.with(this@MainActivity)
                     .load(("http:" + weatherData.current.condition.icon).replace("64x64","128x128"))
-                    .placeholder(R.drawable.ic_launcher_background)
+                    .placeholder(null)
                     .error(R.drawable.ic_launcher_background)
                     .into(weatherImageView)
             }
@@ -82,6 +83,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             weatherCardView.setOnClickListener {
+                Utils.vibratePhone(this@MainActivity)
                 if (isExpanded) {
                     // Collapse the expandable layout
                     expandableLayout.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.collapse_animation));
