@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.WeatherAppWithDI" parent="Base.Theme.WeatherAppWithDI" />
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/bg_btn</item> <!-- Background drawable -->
+        <item name="android:textColor">@color/primary</item> <!-- Text color -->
+        <!-- Add any other attributes you want to customize for the button -->
+    </style>
 </resources>
