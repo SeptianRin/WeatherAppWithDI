@@ -10,7 +10,7 @@
     app:cardElevation="4dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_dark_green"
         android:gravity="center"
@@ -18,14 +18,14 @@
 
         <TextView
             android:id="@+id/tvHourly"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:gravity="center"
             android:textColor="@color/primary"
             android:textSize="18sp"
-            tools:text="1 AM"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            tools:text="1 AM" />
 
         <ImageView
             android:id="@+id/ivHourly"
@@ -36,14 +36,16 @@
 
         <TextView
             android:id="@+id/tvTemp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="18dp"
             android:gravity="center"
             android:textColor="@color/primary"
-            android:textSize="23sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="32°C" />
+            tools:text="32.5°C" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

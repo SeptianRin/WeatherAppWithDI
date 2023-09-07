@@ -17,11 +17,13 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:visibility="gone"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -99,10 +101,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
-                        android:text="Feel Like : 30°C"
                         android:textColor="@color/primary"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:text="Feel Like : 30°C" />
 
                 </LinearLayout>
 
@@ -113,10 +115,11 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:text="Randomized Location"
-                    style="@style/ButtonStyle"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/temperatureLinearLayout" />
+                    app:layout_constraintTop_toBottomOf="@id/temperatureLinearLayout"
+                    tools:visibility="visible" />
 
                 <View
                     android:id="@+id/cardpadding"
@@ -139,7 +142,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/randomizeWeather"
-                    tools:visibility="gone">
+                    tools:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -153,7 +156,7 @@
                             android:layout_weight="10"
                             android:gravity="center"
                             android:text="UV"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                         <TextView
@@ -162,7 +165,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="Cloud"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                         <TextView
@@ -171,7 +174,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="Humidity"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                         <TextView
@@ -180,7 +183,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="Wind"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                         <TextView
@@ -189,7 +192,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="Wind Direction"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -207,7 +210,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text=":"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                         <TextView
@@ -215,7 +218,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text=":"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                         <TextView
@@ -223,7 +226,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text=":"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                         <TextView
@@ -231,7 +234,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text=":"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                         <TextView
@@ -239,7 +242,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text=":"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -257,7 +260,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="8.0"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                         <TextView
@@ -266,7 +269,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="12%"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                         <TextView
@@ -275,7 +278,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="38%"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                         <TextView
@@ -284,7 +287,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="13.7"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                         <TextView
@@ -293,7 +296,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="SSW"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -329,8 +332,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             app:cardBackgroundColor="@color/greenBlue"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp"

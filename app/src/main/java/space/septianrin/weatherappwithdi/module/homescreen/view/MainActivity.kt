@@ -2,8 +2,8 @@ package space.septianrin.weatherappwithdi.module.homescreen.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.transition.TransitionManager
 import android.util.Log
-import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +15,8 @@ import space.septianrin.weatherappwithdi.R
 import space.septianrin.weatherappwithdi.databinding.ActivityMainBinding
 import space.septianrin.weatherappwithdi.module.homescreen.viewmodel.WeatherViewModel
 import space.septianrin.weatherappwithdi.utils.Utils
+import space.septianrin.weatherappwithdi.utils.Utils.gone
+import space.septianrin.weatherappwithdi.utils.Utils.show
 import java.util.Calendar
 import javax.inject.Inject
 
@@ -56,6 +58,8 @@ class MainActivity : AppCompatActivity() {
                 cityNameTextView.text = weatherData.location.name
                 currentTemperature.text = "${weatherData.current.tempC}°C"
                 feelLikeTemperature.text = "Feel Like : ${weatherData.current.feelslikeC}°C"
+                randomizeWeather.show()
+                weatherCardView.show()
                 valueUV.text = "${weatherData.current.uv}"
                 valueCloudPercent.text = "${weatherData.current.cloud}%"
                 valueHumidityPercent.text = "${weatherData.current.humidity}"
@@ -74,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                     weatherData.forecast.forecastday[0].hour
                 )
                 val rightNow = Calendar.getInstance()
-                val currentHour: Int =rightNow.get(Calendar.HOUR_OF_DAY)
+                val currentHour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
                 rvHourlyForecast.apply {
                     adapter = hourlyAdapter
                     scrollToPosition(currentHour)
@@ -110,6 +114,7 @@ class MainActivity : AppCompatActivity() {
 
             weatherCardView.setOnClickListener {
                 Utils.vibratePhone(this@MainActivity)
+                TransitionManager.beginDelayedTransition(this.root)
                 if (isExpanded) {
                     // Collapse the expandable layout
                     expandableLayout.startAnimation(
@@ -118,7 +123,7 @@ class MainActivity : AppCompatActivity() {
                             R.anim.collapse_animation
                         )
                     )
-                    expandableLayout.visibility = View.GONE
+                    expandableLayout.gone()
                     isExpanded = false
                 } else {
                     // Expand the expandable layout
@@ -128,7 +133,7 @@ class MainActivity : AppCompatActivity() {
                             R.anim.expand_animation
                         )
                     )
-                    expandableLayout.visibility = View.VISIBLE
+                    expandableLayout.show()
                     isExpanded = true
                 }
             }

@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.WeatherAppWithDI" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
@@ -6,9 +6,15 @@
     </style>
 
     <style name="Theme.WeatherAppWithDI" parent="Base.Theme.WeatherAppWithDI" />
-    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/bg_btn</item> <!-- Background drawable -->
-        <item name="android:textColor">@color/primary</item> <!-- Text color -->
-        <!-- Add any other attributes you want to customize for the button -->
+
+
+    <style name="MyCustomTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize theme attributes here -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorAccent">@color/darkBlue</item>
+        <item name="colorButtonNormal">@color/darkBlue</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">@color/primary</item>
+        <!-- Add more customizations as needed -->
     </style>
 </resources>

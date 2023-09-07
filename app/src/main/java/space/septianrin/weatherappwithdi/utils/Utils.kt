@@ -7,10 +7,9 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
-import java.text.SimpleDateFormat
+import android.view.View
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 object Utils {
     private val GLOBAL_DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
@@ -36,8 +35,20 @@ object Utils {
         return dateTime.hour
     }
 
-    fun String.getThreeLetterDay(): String{
+    fun String.getThreeLetterDay(): String {
         val date = LocalDateTime.parse(this, GLOBAL_DATETIME_FORMAT)
         return date.format(DateTimeFormatter.ofPattern("EEE"))
+    }
+
+    fun View.show() {
+        this.visibility = View.VISIBLE
+    }
+
+    fun View.gone() {
+        this.visibility = View.GONE
+    }
+
+    fun View.invisible() {
+        this.visibility = View.INVISIBLE
     }
 }
