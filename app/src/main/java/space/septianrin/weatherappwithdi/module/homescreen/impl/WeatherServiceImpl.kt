@@ -4,7 +4,6 @@ import space.septianrin.weatherappwithdi.module.homescreen.service.WeatherServic
 
 class WeatherServiceImpl : WeatherService {
     override fun getRandomizedCity(): String {
-        return arrayOf("Jakarta","Bali","Solo","Medan","Semarang").random()
+        return arrayOf("Yogyakarta","Jakarta","Bali","Surakarta","Medan","Semarang").random()
     }
-
 }

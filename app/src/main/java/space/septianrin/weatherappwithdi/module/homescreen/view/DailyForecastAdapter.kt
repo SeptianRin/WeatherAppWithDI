@@ -13,12 +13,17 @@ import space.septianrin.weatherappwithdi.utils.Utils.getThreeLetterDay
 
 class DailyForecastAdapter(
     private val context: Context,
-    private val dailyItemList: List<ForecastDay>
 ) : RecyclerView.Adapter<DailyForecastAdapter.ViewHolder>() {
 
+    private var dailyItemList: List<ForecastDay> = listOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemDailyForecastBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding)
+    }
+
+    fun updateData(newData : List<ForecastDay>){
+        dailyItemList = newData
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

@@ -10,8 +10,15 @@ import space.septianrin.weatherappwithdi.databinding.ItemHourlyForecastBinding
 import space.septianrin.weatherappwithdi.module.homescreen.model.Hour
 import space.septianrin.weatherappwithdi.utils.Utils.getHourFormat
 
-class HourlyForecastAdapter(private val context: Context, private val hourlyItemList: List<Hour>) :
+class HourlyForecastAdapter(private val context: Context) :
     RecyclerView.Adapter<HourlyForecastAdapter.ViewHolder>() {
+
+    private var hourlyItemList: List<Hour> = listOf()
+
+    fun updateData(newData : List<Hour>) {
+        hourlyItemList = newData
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
