@@ -9,16 +9,22 @@ import space.septianrin.weatherappwithdi.R
 import space.septianrin.weatherappwithdi.databinding.ItemHourlyForecastBinding
 import space.septianrin.weatherappwithdi.module.homescreen.model.Hour
 import space.septianrin.weatherappwithdi.utils.Utils.getHourFormat
+import space.septianrin.weatherappwithdi.utils.Utils.getHourWithAMPMFormat
 
 class HourlyForecastAdapter(private val context: Context) :
     RecyclerView.Adapter<HourlyForecastAdapter.ViewHolder>() {
 
     private var hourlyItemList: List<Hour> = listOf()
+    private var tempUnit: String = "C"
 
     fun updateData(newData : List<Hour>) {
         hourlyItemList = newData
         notifyDataSetChanged()
     }
+    fun updateTempUnit(tempUnit: String) {
+        this.tempUnit = tempUnit
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -41,13 +47,13 @@ class HourlyForecastAdapter(private val context: Context) :
 
         fun bind(item: Hour) {
             with(binding) {
-                tvHourly.text = item.time.getHourFormat()
+                tvHourly.text = item.time.getHourWithAMPMFormat()
                 Glide.with(context)
                     .load("http:" + item.condition.icon)
                     .placeholder(null)
                     .error(R.drawable.ic_launcher_background)
                     .into(ivHourly)
-                tvTemp.text = "${item.tempC}°C"
+                tvTemp.text = if(tempUnit == "C"){"${item.tempC}°C"} else{"${item.tempF}°F"}
             }
         }
     }

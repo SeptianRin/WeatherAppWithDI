@@ -24,14 +24,23 @@ class WeatherViewModel @Inject constructor(
 
     // MutableLiveData to hold weather data
     private val _weatherLiveData = MutableLiveData<WeatherResponse>()
+    private val _tempUnit = MutableLiveData<String>()
 
     // Expose an immutable LiveData for observing weather data
     val weatherLiveData: LiveData<WeatherResponse>
         get() = _weatherLiveData
 
+    val tempUnit: LiveData<String>
+        get() = _tempUnit
+
+
     // Method to simulate fetching weather data
     fun saveData(weatherData: WeatherResponse) {
         _weatherLiveData.postValue(weatherData)
+    }
+
+    fun saveUnit(unit: String){
+        _tempUnit.postValue(unit)
     }
 
     fun getRandomizedCity(): String {

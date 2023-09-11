@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:visibility="gone">
@@ -27,11 +28,24 @@
                 android:layout_height="30dp"
                 android:layout_marginEnd="10dp"
                 android:src="@drawable/sharp_add_location_24"/>
-            <ImageView
-                android:id="@+id/btnSetting"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/round_settings_24"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="°C"
+                android:textStyle="bold"
+                android:textColor="@color/greenBlue"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchTempUnit"
+                android:layout_width="wrap_content"
+                app:thumbTint="@color/greenBlue"
+                app:trackTint="@color/darkBlue"
+                android:layout_height="30dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="°F"
+                android:textStyle="bold"
+                android:textColor="@color/greenBlue"/>
 
         </LinearLayout>
 

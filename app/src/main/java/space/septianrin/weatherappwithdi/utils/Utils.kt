@@ -35,6 +35,11 @@ object Utils {
         return dateTime.hour
     }
 
+    fun String.getHourWithAMPMFormat(): String {
+        val formatAMPM = DateTimeFormatter.ofPattern("h a")
+        return LocalDateTime.parse(this, GLOBAL_DATETIME_FORMAT).format(formatAMPM)
+    }
+
     fun String.getThreeLetterDay(): String {
         val date = LocalDateTime.parse(this, GLOBAL_DATETIME_FORMAT)
         return date.format(DateTimeFormatter.ofPattern("EEE"))

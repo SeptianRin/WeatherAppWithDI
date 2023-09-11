@@ -16,14 +16,19 @@ class DailyForecastAdapter(
 ) : RecyclerView.Adapter<DailyForecastAdapter.ViewHolder>() {
 
     private var dailyItemList: List<ForecastDay> = listOf()
+    private var tempUnit: String = "C"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemDailyForecastBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding)
     }
 
-    fun updateData(newData : List<ForecastDay>){
+    fun updateData(newData: List<ForecastDay>) {
         dailyItemList = newData
         notifyDataSetChanged()
+    }
+
+    fun updateTempUnit(tempUnit: String) {
+        this.tempUnit = tempUnit
     }
 
     override fun getItemCount(): Int {
@@ -40,14 +45,18 @@ class DailyForecastAdapter(
 
         fun bind(item: ForecastDay) {
             with(binding) {
-                tvHour.text = item.hour[8].time.getHourFormat()
-                tvDay.text = item.hour[8].time.getThreeLetterDay()
+                tvHour.text = item.hour[(0..23).random()].time.getHourFormat()
+                tvDay.text = item.hour[(0..23).random()].time.getThreeLetterDay()
                 Glide.with(context)
                     .load("http:" + item.hour[8].condition.icon)
                     .placeholder(null)
                     .error(R.drawable.ic_launcher_background)
                     .into(ivHourly)
-                tvTemp.text = "${item.day.mintempC} / ${item.day.maxtempC}°C"
+                tvTemp.text = if (tempUnit == "C") {
+                    "${item.day.mintempC} / ${item.day.maxtempC}°C"
+                } else {
+                    "${item.day.mintempF} / ${item.day.maxtempF}°F"
+                }
             }
         }
     }
