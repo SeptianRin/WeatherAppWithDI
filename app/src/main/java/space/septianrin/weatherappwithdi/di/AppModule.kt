@@ -1,6 +1,5 @@
 package space.septianrin.weatherappwithdi.di
 
-import androidx.navigation.Navigator.Name
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +24,7 @@ object AppModule {
 
     @Provides
     @Named("io")
-    fun providesIoScheduler() : Scheduler= Schedulers.io()
+    fun providesIoScheduler(): Scheduler = Schedulers.io()
 
     @Provides
     @Named("main")

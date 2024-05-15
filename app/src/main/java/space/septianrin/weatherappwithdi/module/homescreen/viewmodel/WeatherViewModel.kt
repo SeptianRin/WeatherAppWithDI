@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import space.septianrin.weatherappwithdi.model.RxSchedulers
 import space.septianrin.weatherappwithdi.module.homescreen.service.WeatherService
 import space.septianrin.weatherappwithdi.networking.APIService
@@ -57,5 +59,9 @@ class WeatherViewModel @Inject constructor(
             .subscribeOn(schedulers.io)
             .observeOn(schedulers.main)
             .subscribe(onSuccess, onError)
+    }
+
+    suspend fun fetchCityWeather(city: String): WeatherResponse = withContext(Dispatchers.IO){
+        return@withContext apiService.getCurrentWeatherByCoroutine(apiKey, city,FORECAST_DAY)
     }
 }

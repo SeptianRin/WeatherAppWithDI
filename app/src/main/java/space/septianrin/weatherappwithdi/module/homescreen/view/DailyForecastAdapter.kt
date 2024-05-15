@@ -8,8 +8,11 @@ import com.bumptech.glide.Glide
 import space.septianrin.weatherappwithdi.R
 import space.septianrin.weatherappwithdi.databinding.ItemDailyForecastBinding
 import space.septianrin.weatherappwithdi.module.homescreen.model.ForecastDay
+import space.septianrin.weatherappwithdi.utils.Utils
 import space.septianrin.weatherappwithdi.utils.Utils.getHourFormat
 import space.septianrin.weatherappwithdi.utils.Utils.getThreeLetterDay
+import space.septianrin.weatherappwithdi.utils.Utils.gone
+import space.septianrin.weatherappwithdi.utils.Utils.show
 
 class DailyForecastAdapter(
     private val context: Context,
@@ -47,11 +50,23 @@ class DailyForecastAdapter(
             with(binding) {
                 tvHour.text = item.hour[(0..23).random()].time.getHourFormat()
                 tvDay.text = item.hour[(0..23).random()].time.getThreeLetterDay()
-                Glide.with(context)
-                    .load("http:" + item.hour[8].condition.icon)
-                    .placeholder(null)
-                    .error(R.drawable.ic_launcher_background)
-                    .into(ivHourly)
+                when(item.hour[8].condition.code){
+                    Utils.IconHelper.Sunny.code -> {
+                        ivHourly.gone()
+                        avHourly.show()
+                    }
+
+                    else -> {
+                        Glide.with(context)
+                            .load("http:" + item.hour[8].condition.icon)
+                            .placeholder(null)
+                            .error(R.drawable.ic_launcher_background)
+                            .into(ivHourly)
+                        ivHourly.show()
+                        avHourly.gone()
+                    }
+                }
+
                 tvTemp.text = if (tempUnit == "C") {
                     "${item.day.mintempC} / ${item.day.maxtempC}°C"
                 } else {

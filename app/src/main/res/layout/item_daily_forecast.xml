@@ -44,7 +44,21 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/tvDay"
-            app:layout_constraintEnd_toStartOf="@id/tvTemp"/>
+            app:layout_constraintEnd_toStartOf="@id/tvTemp"
+            android:visibility="gone"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/avHourly"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:lottie_rawRes="@raw/sunny"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvDay"
+            app:layout_constraintEnd_toStartOf="@id/tvTemp"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tvTemp"

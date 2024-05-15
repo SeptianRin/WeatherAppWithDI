@@ -56,4 +56,12 @@ object Utils {
     fun View.invisible() {
         this.visibility = View.INVISIBLE
     }
+
+    enum class IconHelper(val code: Int) {
+        Sunny(1000),
+        PartlyCloudly(1003),
+        Cloudy(1006),
+        Overcast(1009),
+        Mist(1030),
+    }
 }

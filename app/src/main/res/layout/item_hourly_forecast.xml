@@ -32,7 +32,18 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/bg_dark_blue_oval"
-            android:src="@drawable/sun_cloud_rain" />
+            android:src="@drawable/sun_cloud_rain"
+            android:visibility="gone"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/avHourly"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_dark_blue_oval"
+            app:lottie_rawRes="@raw/sunny"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tvTemp"

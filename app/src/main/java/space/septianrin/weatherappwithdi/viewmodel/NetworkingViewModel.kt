@@ -9,7 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NetworkingViewModel @Inject constructor(private val weatherApiService: APIService) : ViewModel() {
     suspend fun fetchWeather(location: String, apiKey: String) : WeatherResponse{
-        return weatherApiService.getCurrentWeather(apiKey,location)
+        return weatherApiService.getCurrentWeatherByCoroutine(apiKey,location,7)
     }
 
 }

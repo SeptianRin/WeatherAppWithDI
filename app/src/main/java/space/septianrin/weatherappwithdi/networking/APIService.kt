@@ -14,9 +14,10 @@ import space.septianrin.weatherappwithdi.module.homescreen.model.WeatherData
 
 interface APIService {
     @GET("current.json")
-    suspend fun getCurrentWeather(
+    suspend fun getCurrentWeatherByCoroutine(
         @Query("key") apiKey : String,
         @Query("q") location : String,
+        @Query("days") days : Int,
     ) : WeatherResponse
 
     @GET("forecast.json")

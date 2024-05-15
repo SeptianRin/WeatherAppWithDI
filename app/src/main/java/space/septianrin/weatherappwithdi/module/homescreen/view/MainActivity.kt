@@ -24,6 +24,8 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.yield
 import space.septianrin.weatherappwithdi.R
 import space.septianrin.weatherappwithdi.databinding.ActivityMainBinding
 import space.septianrin.weatherappwithdi.module.homescreen.viewmodel.WeatherViewModel
@@ -70,6 +72,13 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             val city = weatherViewModel.getRandomizedCity()
+//            try {
+//                val weatherResponse = weatherViewModel.fetchCityWeather(city)
+//                Log.e("onCreate: ", "$weatherResponse")
+//                weatherViewModel.saveData(weatherResponse)
+//            }catch (_: Exception){
+//
+//            }
             weatherViewModel.getCityWeather(
                 city,
                 { response ->
@@ -148,14 +157,19 @@ class MainActivity : AppCompatActivity() {
         with(binding) {
             randomizeWeather.setOnClickListener {
                 val city = weatherViewModel.getRandomizedCity()
-                weatherViewModel.getCityWeather(
-                    city,
-                    { response ->
-                        weatherViewModel.saveData(response)
-                    }, { error ->
-                        Log.e("onCreate: ", error.toString())
-                    }
-                )
+                runBlocking {
+                    weatherViewModel.fetchCityWeather(city)
+                    yield()
+                }
+
+//                weatherViewModel.getCityWeather(
+//                    city,
+//                    { response ->
+//                        weatherViewModel.saveData(response)
+//                    }, { error ->
+//                        Log.e("onCreate: ", error.toString())
+//                    }
+//                )
             }
 
             weatherCardView.setOnClickListener { expandCard() }
